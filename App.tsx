@@ -1,6 +1,7 @@
 import * as React from 'react';
 import './style.css';
 import {useState} from 'react'
+
 export default function App() {
   const [count, setCount] = useState(0)
 
@@ -13,9 +14,9 @@ function handleDecrement() {
 }
   return (
     <div>
-      <button onClick={handleDecrement}>-</button>
+      <button className='btn btn-outline-danger' onClick={handleDecrement}>-</button>
       <span>{count}</span>
-      <button onClick={handleIncrement}>+</button>
+      <button className='btn btn-outline-success' onClick={handleIncrement}>+</button>
     </div>
   );
 }
