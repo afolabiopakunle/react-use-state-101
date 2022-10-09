@@ -3,20 +3,43 @@ import './style.css';
 import {useState} from 'react'
 
 export default function App() {
-  const [count, setCount] = useState(0)
+  const [state, setState] = useState({count: 1, theme: 'light'})
+
+  const count = state.count;
+  const theme = state.theme;
 
  function handleIncrement() {
-    setCount((prev)=> prev + 1 )
+    setState((prevState: any) => {
+      return {...prevState, count: state.count + 1}
+    })
+  }
+
+  function handleChangeTheme() {
+    if(theme === 'light') {
+      setState(prevState => {
+        return {...prevState, theme: 'dark'}
+      })
+    } else {
+      setState(prevState => {
+        return {...prevState, theme: 'light'}
+      })
+    }
+
   }
 
 function handleDecrement() {
-  setCount(prev => prev - 1)
+  setState((prevState) => {
+    return {...prevState, count: state.count - 1}
+  })
 }
   return (
-    <div>
+    <div className={(theme === 'light' ? 'bg-light' : 'bg-dark')} style={{height: '100vh'}}>
       <button className='btn btn-outline-danger' onClick={handleDecrement}>-</button>
-      <span>{count}</span>
+      <span className={theme ==="light" ? 'text-dark': 'text-white'}>{count} {theme}</span>
       <button className='btn btn-outline-success' onClick={handleIncrement}>+</button>
+      <br />
+      <br />
+      <button className={'btn ' + (theme === 'blue' ? 'btn-secondary': 'btn-primary')}  onClick={handleChangeTheme}>{theme=== 'light'? 'Light Theme': 'Dark Theme'}</button>
     </div>
   );
 }
